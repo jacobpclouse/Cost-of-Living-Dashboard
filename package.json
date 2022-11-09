@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/jacobpclouse/Cost-of-Living-Dashboard/issues"
   },
-  "homepage": "https://github.com/jacobpclouse/Cost-of-Living-Dashboard#readme"
+  "homepage": "https://github.com/jacobpclouse/Cost-of-Living-Dashboard#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
