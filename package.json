@@ -1,0 +1,23 @@
+{
+  "name": "cost-of-living-dashboard",
+  "version": "1.0.0",
+  "description": "A webpage that gathers data from apis across the net to construct the cost of living in an area",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacobpclouse/Cost-of-Living-Dashboard.git"
+  },
+  "keywords": [
+    "express",
+    "col"
+  ],
+  "author": "jacob clouse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jacobpclouse/Cost-of-Living-Dashboard/issues"
+  },
+  "homepage": "https://github.com/jacobpclouse/Cost-of-Living-Dashboard#readme"
+}
