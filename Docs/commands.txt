@@ -1,0 +1,10 @@
+start server:
+nodemon index.js
+
+
+curl/post:
+curl -X POST "http://localhost:3000/hello"
+
+
+link to the webpage:
+http://localhost:3000
