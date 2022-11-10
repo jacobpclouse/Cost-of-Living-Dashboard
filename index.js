@@ -27,6 +27,10 @@ app.use('/', main1)
 app.use('/new', new1);
 
 
+//Other routes here
+app.get('*', function(req, res){
+    res.send('Sorry, this is an invalid URL.');
+ });
 
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
