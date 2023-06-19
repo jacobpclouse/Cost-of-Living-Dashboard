@@ -1,0 +1,55 @@
+SETUP VIRT ENVIR:
+
+    Update Pip: pip install --upgrade pip
+
+
+
+    Create .gitignore and push Virtural Envir name into it (when first starting up -- you can use any name): echo "venvName/" > .gitignore
+        You will need to add the names of the other folders you don't want to track into this
+
+
+
+    Create New Virtural Envir. (use same name as you did in the .gitignore)
+        If python2 and python3 is installed: python3 -m venv venvName
+        Else: python -m venv venvName
+
+
+
+    Activate Virtual Envir.
+        (LINUX:) source venvName/bin/activate
+        (WINDOWS: ) source venvName/Scripts/activate
+
+
+
+    Install Packages inside it: python -m pip install <package-name>
+
+
+
+    Deactivate Virtual Envir: deactivate
+
+
+
+    From: https://realpython.com/python-virtual-environments-a-primer/
+
+
+
+INSTALL REQUIREMENTS.TXT:
+
+pip install -r requirements.txt
+PIP FREEZE REQUIREMENTS.TXT:
+
+pip freeze > requirements.txt
+Check which python version you are using:
+
+    If both python2 and python3 are installed: which python3
+    Else: which python
+    You want the version of python to be the one inside your project folder
+
+
+Virtual link:
+
+cd venv/lib/python2.7 && ln -s /usr/local/lib/python2.7/dist-packages/cv2.so
+cd venv/lib/python2.7 && ln -s /usr/local/lib/python2.7/dist-packages/cv.py
+
+cd venv1/lib/python3.8 && ln -s /usr/local/lib/python3.8/dist-packages/cv2.so
+cd venv1/lib/python3.8 && ln -s /usr/local/lib/python3.8/dist-packages/cv.py 
