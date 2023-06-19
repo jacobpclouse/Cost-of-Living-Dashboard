@@ -27,10 +27,13 @@ import zipfile  # used in zipping images
 def our_Logo():
     run_at_time = defang_datetime()
     print('Code designed, written & tested by:')
-    print('  |                                _ )            |         |          ')
-    print('  |      |   |  __ \    _` |       _ \ \          |   _` |  |  /   _ \ ')
-    print('  |      |   |  |   |  (   |      ( `  <      \   |  (   |    <    __/ ')
-    print(' _____| \__,_| _|  _| \__,_|     \___/\/     \___/  \__,_| _|\_\ \___| ')
+    print("  _____                _   _ _        _       _        ")
+    print(" |  __ \              | \ | ( )      | |     | |       ")
+    print(" | |  | | __ _ _ __   |  \| |/       | | __ _| | _____ ")
+    print(" | |  | |/ _` | '_ \  | . ` |    _   | |/ _` | |/ / _ |")
+    print(" | |__| | (_| | | | | | |\  |   | |__| | (_| |   <  __/")
+    print(" |_____/ \__,_|_| |_| |_| \_|    \____/ \__,_|_|\_\___|")
+
     print('Built for ICSI 526 - Spring 2023')
     print(f'Started at: {run_at_time}')
 
