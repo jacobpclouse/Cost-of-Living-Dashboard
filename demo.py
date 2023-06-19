@@ -33,8 +33,7 @@ def our_Logo():
     print(" | |  | |/ _` | '_ \  | . ` |    _   | |/ _` | |/ / _ |")
     print(" | |__| | (_| | | | | | |\  |   | |__| | (_| |   <  __/")
     print(" |_____/ \__,_|_| |_| |_| \_|    \____/ \__,_|_|\_\___|")
-
-    print('Built for ICSI 526 - Spring 2023')
+    print('Built Summer 2023')
     print(f'Started at: {run_at_time}')
 
 
