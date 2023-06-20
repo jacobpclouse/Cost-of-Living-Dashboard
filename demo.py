@@ -1,7 +1,5 @@
-# Written by Luna D. and Jacob Clouse for ICSI 526 
-
-# Original Paper -> Alternative N-bit Key Data Encryption for Block Ciphers
-# Edited on Windows 10 - may need to be edited if you want to use on Linux/MacOS
+# Written by Dan B. and Jacob C. during Summer 2023
+# Edited on Windows 10 - may need to be edited if you want to use on Linux/MacOS/Win 11
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Importing Libraries / Modules
@@ -11,14 +9,17 @@ import os
 # moving files and folders
 import shutil  # used to move files around and clean folders
 import zipfile  # used in zipping images
-
+from flask import Flask, request, send_file, \
+    jsonify  # for web back end
+from flask_cors import CORS 
 
 
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Variables
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-
+demo = Flask(__name__) # name of this python page (ie: demo.py)
+DATABASE = 'Jobs_database.db'
 
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -46,20 +47,6 @@ def defang_datetime():
     current_datetime = current_datetime.replace(" ", "_")
 
     return current_datetime
-
-
-# --- Function to store data into a bin file for later retrival ---
-def store_the_enck_bin(value, filename):
-    with open(filename, 'wb') as file:
-        file.write(value)
-    file.close()
-
-
-# --- Function to read data into variable from bin ---
-def read_enck_to_variable(textName):
-    with open(textName, 'rb') as f:
-        my_bytes_object = f.read()
-    return my_bytes_object
 
 
 # --- Function to empty out a directory ---
@@ -100,12 +87,12 @@ def unzip_files(zip_name):
         zip_obj.extractall()
 
 
-
 # --- Function to remove unneeded zip files ---
 def delete_zip_file(extraZip):
     if os.path.exists(extraZip) and extraZip.endswith('.zip'):
         os.remove(extraZip)
         print(f"{extraZip} has been deleted.")
+
 
 # --- Function to get extension for retrieval --
 def need_extension(filename):
@@ -117,12 +104,15 @@ def need_extension(filename):
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Routes
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+@demo.route('/')
+def hello():
+    our_Logo()
+    return 'Hello, World!'
 
 
 
-
-# # -------------------------------------
-# # main statement - used to set dev mode and do auto reloading - remove this before going to production
-# # -------------------------------------
-# if __name__ == '__main__':
-#     demo.run(debug=True)
+# -------------------------------------
+# main statement - used to set dev mode and do auto reloading - remove this before going to production
+# -------------------------------------
+if __name__ == '__main__':
+    demo.run(debug=True)
