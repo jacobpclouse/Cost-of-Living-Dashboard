@@ -9,18 +9,43 @@ import os
 # moving files and folders
 import shutil  # used to move files around and clean folders
 import zipfile  # used in zipping images
-from flask import Flask, request, send_file, \
-    jsonify  # for web back end
+# Flask Bois
+from flask import Flask, render_template, request, url_for, redirect, send_file, jsonify  # for web back end
 from flask_cors import CORS 
-
+# SQL and DB stuff
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import func
 
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Variables
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-demo = Flask(__name__) # name of this python page (ie: demo.py)
 DATABASE = 'Jobs_database.db'
+basedir = os.path.abspath(os.path.dirname(__file__))
 
+demo = Flask(__name__) # name of this python page (ie: demo.py)
+demo.config['SQLALCHEMY_DATABASE_URI'] =\
+        'sqlite:///' + os.path.join(basedir, DATABASE)
+# 'sqlite:///' + os.path.join(basedir, 'database.db')
+demo.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(demo)
+
+
+## DB creation!
+
+class Student(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    firstname = db.Column(db.String(100), nullable=False)
+    lastname = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(80), unique=True, nullable=False)
+    age = db.Column(db.Integer)
+    created_at = db.Column(db.DateTime(timezone=True),
+                           server_default=func.now())
+    bio = db.Column(db.Text)
+
+    def __repr__(self):
+        return f'<Student {self.firstname}>'
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Functions
