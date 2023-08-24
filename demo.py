@@ -24,7 +24,7 @@ from bs4 import BeautifulSoup
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Variables
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-DATABASE = 'Jobs_database.db'
+DATABASE = 'WWR_Jobs_database.db'
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 demo = Flask(__name__) # name of this python page (ie: demo.py)
@@ -38,18 +38,18 @@ db = SQLAlchemy(demo)
 
 ## DB creation!
 
-class Student(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(100), nullable=False)
-    lastname = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(80), unique=True, nullable=False)
-    age = db.Column(db.Integer)
-    created_at = db.Column(db.DateTime(timezone=True),
-                           server_default=func.now())
-    bio = db.Column(db.Text)
+class Job(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    job_title = db.Column(db.String(100), nullable=False)
+    company_name = db.Column(db.String(100), nullable=False)
+    job_location = db.Column(db.String(80), unique=True, nullable=False)
+    # age = db.Column(db.Integer)
+    # created_at = db.Column(db.DateTime(timezone=True),
+    #                        server_default=func.now())
+    # bio = db.Column(db.Text)
 
     def __repr__(self):
-        return f'<Student {self.firstname}>'
+        return f'<Job Listing: {self.job_title}>'
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Functions
@@ -185,8 +185,7 @@ def hello():
 
 @demo.route('/scrape')
 def scrapeRoute():
-
-    print("Scraping!")
+    # print("Scraping!")
     scrape_url_function()
     return 'Scraping!'
 
