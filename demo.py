@@ -15,6 +15,10 @@ from flask_cors import CORS
 # SQL and DB stuff
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
+# Scraping stuff
+import requests
+import pandas as pd
+from bs4 import BeautifulSoup
 
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -119,12 +123,57 @@ def delete_zip_file(extraZip):
         print(f"{extraZip} has been deleted.")
 
 
-# --- Function to get extension for retrieval --
+# --- Function to get extension for retrieval ---
 def need_extension(filename):
     name, extension = filename.split(".")
     upperCaseExt = extension.upper()  
     print(upperCaseExt)
     return upperCaseExt
+
+
+# --- Function to scrape data ---
+def scrape_url_function():
+
+    print(" __                      _             ")
+    print("/ _\ ___ _ __ __ _ _ __ (_)_ __   __ _ ")
+    print("\ \ / __| '__/ _` | '_ \| | '_ \ / _` |")
+    print("_\ \ (__| | | (_| | |_) | | | | | (_| |")
+    print("\__/\___|_|  \__,_| .__/|_|_| |_|\__, |")
+    print("                  |_|            |___/ ")
+
+    # Define the URL of the job page you want to scrape
+    url = 'https://weworkremotely.com/remote-full-time-jobs'
+
+
+    # Send a GET request to retrieve the HTML content of the page
+    response = requests.get(url)
+
+    # Check if the request was successful (status code 200)
+    if response.status_code == 200:
+        # Create a BeautifulSoup object to parse the HTML content
+        soup = BeautifulSoup(response.content, 'html.parser')
+        
+        # Find the specific elements or tags that contain the job listings
+        job_elements = soup.find_all('li', class_='feature')
+        
+        # Create a list to store the extracted job listings
+        job_listings = []
+        
+        # Extract the job data from the elements and store them in the list
+        for element in job_elements:
+            job_title = element.find('span', class_='title').text.strip()
+            company_name = element.find('span', class_='company').text.strip()
+            job_location = element.find('span', class_='region company').text.strip()
+            job_listings.append({'Job Title': job_title, 'Company': company_name, 'Location': job_location})
+        
+        # Create a DataFrame from the extracted job listings
+        job_listings_df = pd.DataFrame(job_listings)
+        
+        # Print the extracted job listings
+        print(job_listings_df)
+    else:
+        print(f"Error: {response.status_code}")
+
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Routes
@@ -133,6 +182,13 @@ def need_extension(filename):
 def hello():
     our_Logo()
     return 'Hello, World!'
+
+@demo.route('/scrape')
+def scrapeRoute():
+
+    print("Scraping!")
+    scrape_url_function()
+    return 'Scraping!'
 
 
 
