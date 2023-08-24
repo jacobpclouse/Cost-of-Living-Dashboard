@@ -133,7 +133,7 @@ def need_extension(filename):
 
 # --- Function to scrape data ---
 def scrape_url_function():
-
+    title = "Jake N Dan COL Board | Scrape N Post!"
     print(" __                      _             ")
     print("/ _\ ___ _ __ __ _ _ __ (_)_ __   __ _ ")
     print("\ \ / __| '__/ _` | '_ \| | '_ \ / _` |")
@@ -157,22 +157,36 @@ def scrape_url_function():
         job_elements = soup.find_all('li', class_='feature')
         
         # Create a list to store the extracted job listings
-        job_listings = []
+        job_listings_scrape = []
         
         # Extract the job data from the elements and store them in the list
         for element in job_elements:
-            job_title = element.find('span', class_='title').text.strip()
-            company_name = element.find('span', class_='company').text.strip()
-            job_location = element.find('span', class_='region company').text.strip()
-            job_listings.append({'Job Title': job_title, 'Company': company_name, 'Location': job_location})
-        
+            job_title_scrape = element.find('span', class_='title').text.strip()
+            company_name_scrape = element.find('span', class_='company').text.strip()
+            job_location_scrape = element.find('span', class_='region company').text.strip()
+            job_listings_scrape.append({'Job Title': job_title_scrape, 'Company': company_name_scrape, 'Location': job_location_scrape})
+            # Putting all values into one object and then adding/commiting that to the DB
+            addAllVal = Job(job_title=job_title_scrape,company_name=company_name_scrape,job_location=job_location_scrape)
+
         # Create a DataFrame from the extracted job listings
-        job_listings_df = pd.DataFrame(job_listings)
+        job_listings_df = pd.DataFrame(job_listings_scrape)
         
         # Print the extracted job listings
         print(job_listings_df)
-    else:
-        print(f"Error: {response.status_code}")
+
+## ASENDING ORDER BELOW -- commiting
+        try:
+            db.session.add(addAllVal)
+            db.session.commit()
+    #         return redirect('/unhandled')
+            return "Commited values to the DB"
+        except: 
+            return "Failed to Commit"
+
+    #     except: 
+    #         return redirect('/404', title = title) # if there is an issue, will return to 404 page
+    # else:
+    #     print(f"Error: {response.status_code}")
 
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -186,7 +200,8 @@ def hello():
 @demo.route('/scrape')
 def scrapeRoute():
     # print("Scraping!")
-    scrape_url_function()
+    result = scrape_url_function()
+    print(result)
     return 'Scraping!'
 
 
