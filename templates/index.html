@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="title">{% block title %} Jobs {% endblock %}</h1>
+    <div class="content">
+        {% for student in students %}
+            <div class="student">
+                <p><b>#{{ job.id }}</b></p>
+                <b>
+                    <p class="name">{{ job.job_title }}</p>
+                </b>
+                <p>{{ job.job_location }}</p>
+               
+                <p>Joined: {{ job.created_at }}</p>
+                <div class="bio">
+                    <h4>Company</h4>
+                    <p>{{ job.company_name }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

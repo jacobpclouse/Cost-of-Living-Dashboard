@@ -1,6 +1,7 @@
 # Cost-of-Living-Dashboard
 A dashboard that uses data from the internet to weight the opportunities and obstacles in different cities across the world
 
+need to return a list of all jobs (then iterate through them, then add all to the list and then commit, then adjust the template code to use the correct variable names so it doesn't error out)
 
 ## Sources:
 - Web Scraping with Python? Easy!: https://medium.com/@michael.zats/web-scraping-with-python-easy-90d4e749910a

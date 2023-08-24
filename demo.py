@@ -193,9 +193,12 @@ def scrape_url_function():
 # Routes
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 @demo.route('/')
-def hello():
-    our_Logo()
-    return 'Hello, World!'
+def index():
+    students = Job.query.all()
+    return render_template('index.html', students=students)
+# def hello():
+#     our_Logo()
+#     return 'Hello, World!'
 
 @demo.route('/scrape')
 def scrapeRoute():
